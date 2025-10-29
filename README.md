@@ -8,9 +8,8 @@ Python script that fixes steam game icons showing the steam logo on desktop. Thi
 
 ## Dependencies
 
-[steam](https://pypi.org/project/steam/) <br>
-[gevent-eventemitter](https://pypi.org/project/gevent-eventemitter/) <br>
-[protobuf](https://pypi.org/project/protobuf/) <br>
+[python steam package](https://pypi.org/project/steam/) (with SteamClient dependencies) <br>
+
 
 ## Usage
 
