@@ -10,7 +10,9 @@ client: SteamClient = SteamClient()
 
 appid: int = 730
 
-product_info: dict[Any, Any] | None = client.get_product_info([appid], [], False, False, False)
+product_info = client.get_product_info([appid], [], False, False, False)
 
 if product_info is None:
     error("Product info is none")
+
+print(product_info)
