@@ -9,6 +9,7 @@ Python script that fixes steam game icons showing the steam logo on desktop. Thi
 ## Dependencies
 
 [python steam package](https://pypi.org/project/steam/) (with SteamClient dependencies) <br>
+[ImageMagick](https://imagemagick.org/)
 
 
 ## Usage
