@@ -11,8 +11,6 @@ import re
 import os
 
 client: SteamClient = SteamClient()
-parser: ConfigParser = configparser.ConfigParser()
-parser.optionxform = str
 
 desktop_dir: Path = Path('~/Desktop').expanduser()
 icon_dir: Path = Path('~/.local/share/icons/hicolor/64x64/apps/').expanduser()
@@ -53,7 +51,7 @@ def download_icon(appid: int) -> None:
         
     if product_info['apps'][appid]['_missing_token']:
         tokens = client.get_access_tokens(app_ids=[appid])
-        result = client.get_product_info(apps=[{'appid': appid,'access_token': tokens['apps'][appid]}])
+        result = client.get_product_info(apps=[{'appid': appid,'access_token': tokens['apps'][appid]}])  # type: ignore
         
     if not 'clienticon' in product_info['apps'][appid]['common']:
         warning(f'No icon string found for appid: {appid}!')
@@ -61,6 +59,8 @@ def download_icon(appid: int) -> None:
         icon_string = product_info['apps'][appid]['common']['clienticon']
         
         icon_url = f"https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/{appid}/{icon_string}.ico"
+
+        # TODO: Also download linuxclient zip to ~/.steam/steam/steam/games
 
         icon_path = icon_dir.joinpath(f'steam_icon_{appid}.ico')
         icon_path_png = icon_path.with_suffix('.png')
@@ -81,6 +81,8 @@ def download_icon(appid: int) -> None:
         print(f"Icon for appid: {appid} downloaded succesfully!")
 
 def parse_shorcut(file: Path):
+    parser: ConfigParser = configparser.ConfigParser()
+    parser.optionxform = str # type: ignore
     parser.read(file)
     if 'Exec' in parser['Desktop Entry']:
         exec_str = parser.get('Desktop Entry', 'Exec', raw=True)
