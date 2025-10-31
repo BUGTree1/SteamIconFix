@@ -60,8 +60,6 @@ def download_icon(appid: int) -> None:
         
         icon_url = f"https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/{appid}/{icon_string}.ico"
 
-        # TODO: Also download linuxclient zip to ~/.steam/steam/steam/games
-
         icon_path = icon_dir.joinpath(f'steam_icon_{appid}.ico')
         icon_path_png = icon_path.with_suffix('.png')
 
